@@ -9,7 +9,11 @@
 <body>
   <div id="app">
     <p v-if="mode == 1">Showing v-if directive content</p>
-    <p v-else-if="mode == 2">Showing v-else-if directive content</p>
+    <template v-else-if="mode == 2" >
+      <p>Bonus content</p>
+      <h4>Showing v-else-if directive content</h4>
+    </template>
+    
     <p v-else=>Showing v-else directive content</p>
 
     <select v-model="mode">
