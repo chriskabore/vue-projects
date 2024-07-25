@@ -13,9 +13,9 @@ export default{
   }
 
 </script>
-<style>
- p {
-  color:red;
+<style scoped lang="scss">
+ p:hover {
+  color:darken($color:#11cc44, $amount: 15%);
  }
 </style>
 
