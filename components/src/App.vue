@@ -1,15 +1,24 @@
 
 <template>
-  <p>Hey!!!</p>
-  <Greeting/>
+  <h3>Hey!!!</h3>
+
+  <greeting :age="age"/>
+  <user :age="age" @age-change="age++"/>
 </template>
 
 <script>
   import Greeting from '@/components/Greeting.vue'; 
+  import User from './components/User.vue';
   export default{
     name: "App", 
     components: {
-      Greeting: Greeting
+      Greeting: Greeting,
+      User: User,
+    }, 
+    data(){
+      return{
+        age: 20,
+      }
     }
   }
 </script>
