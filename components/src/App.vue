@@ -3,7 +3,7 @@
   <h3>Hey!!!</h3>
 
   <greeting :age="age"/>
-  <user :age="age" @age-change="age++"/>
+  <user :age="age" @age-change="updateAge"/>
 </template>
 
 <script>
@@ -18,6 +18,11 @@
     data(){
       return{
         age: 20,
+      }
+    }, 
+    methods:{
+      updateAge(num){
+        this.age +=num
       }
     }
   }
