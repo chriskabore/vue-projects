@@ -1,12 +1,33 @@
 <template>
-  <button type="button" @click="flag = !flag">Toggle</button>
+  <!--<button type="button" @click="flag = !flag">Toggle</button>-->
   <!-- <Transition name="fade" mode="out-in">
     <h2 v-if="flag" key="main">Hello world!</h2> 
     <h2 v-else key="secondary">Another Hello</h2>
   </Transition> -->
-  <transition name="zoom" appear>
+  <!--<transition name="zoom" appear>
     <h2 v-if="flag">Hello!</h2>
-  </transition>
+  </transition>-->
+
+  <!--<transition
+    @before-enter="beforeEnter"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @before-leave="beforeLeave"
+    @leave="leave"
+    @after-leave="afterLeave"
+    :css="true"
+    name="fade">
+    <h2 v-if="flag">Hey!!</h2>
+  </transition>-->
+
+  <button @click="addItem">Add</button>
+  <ul>
+    <transition-group name="fade">
+      <li v-for="(number, index) in numbers" :key="number" @click="removeItem(index)">
+      {{ number }}
+    </li>
+    </transition-group>
+  </ul>
   
 </template>
 
@@ -16,14 +37,63 @@
     data(){
       return {
         flag: true, 
+        numbers: [1,2,3,4,5],
       }
       
     },
+    methods:{
+      addItem(){
+        const num = Math.floor(Math.random() * 100 + 1 );
+        const index = Math.floor(Math.random() * this.numbers.length);
+        this.numbers.splice(index, 0, num);
+      },
+      removeItem(index){
+        this.numbers.splice(index, 1);
+      },
+      beforeEnter(el){
+        console.log("before-enter event fired", el)
+
+      }, 
+      enter(el){
+        console.log("enter event fired", el)
+       /* const animation = el.animate([{transform:"scale3d(0,0,0)"}, {}], {duration: 1000,});
+        animation.onfinish = () => {
+          done();        
+        }*/
+       
+      }, 
+      afterEnter(el){
+        console.log("after-enter event fired", el)
+      }, 
+      beforeLeave(el){
+        console.log("before-leave event fired", el)
+      },
+      leave(el){
+        console.log("leave event fired", el)
+        /*const animation = el.animate([{}, {transform:"scale3d(0,0,0)"}], {duration: 1000,});
+        animation.onfinish = () => {
+          done();        
+        }*/
+        
+
+      }, 
+      afterLeave(el){
+        console.log("after-leave event fired", el)
+      }
+    }
   }
 
 </script>
 
 <style>
+  body{
+    display: inline-block;
+  }
+
+  li{
+    font-size: 22px;
+    cursor: pointer;
+  }
  h2{
    width: 400px;
    padding: 20px;
@@ -34,6 +104,10 @@
  }
 
  .fade-enter-active{
+  transition: all 1s linear;
+ }
+
+ .fade-move{
   transition: all 1s linear;
  }
 
